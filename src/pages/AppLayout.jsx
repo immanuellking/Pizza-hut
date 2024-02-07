@@ -6,7 +6,7 @@ const AppLayout = () => {
   return (
     <div className="w-full">
       <Header />
-      <div>
+      <div className="w-full">
         <Outlet />
       </div>
     </div>
