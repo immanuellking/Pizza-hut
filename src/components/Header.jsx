@@ -15,7 +15,7 @@ const Header = () => {
             <FiSearch size={27} color="#7E8494" />
             <input
               type="search"
-              placeholder="Search for meal"
+              placeholder="Search for meal..."
               name=""
               id=""
               className="ml-3 outline-0 w-full h-4 bg-transparent placeholder:text-sm placeholder:font-light"
