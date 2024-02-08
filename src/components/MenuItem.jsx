@@ -35,7 +35,7 @@ const MenuItem = ({ pizza }) => {
         </div>
       </div>
 
-      <Modal show={show} setShow={setShow} pizza={pizza} />
+      {show && <Modal setShow={setShow} pizza={pizza} />}
     </>
   );
 };
