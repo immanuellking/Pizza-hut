@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { formatCurrency } from "../utils/formatters";
+import Button from "./Button";
 
 const Modal = ({ show, pizza, setShow }) => {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
@@ -22,7 +23,7 @@ const Modal = ({ show, pizza, setShow }) => {
       <main className="min-w-[30rem] bg-white relative">
         <div className="mx-5 my-5">
           <img src={imageUrl} alt="pizza" className="w-full h-72" />
-          <div className="px-3 py-4 space-y-3">
+          <div className=" py-4 space-y-3">
             <div className="flex justify-between">
               <h3 className="text-base font-bold">{name}</h3>
               <p className="font-semibold">{formatCurrency(unitPrice)}</p>
@@ -39,8 +40,53 @@ const Modal = ({ show, pizza, setShow }) => {
             </div>
           </div>
         </div>
-        <div>
-          
+
+        <div className="flex justify-between px-5 py-6 shadow-[rgba(50,50,71,.05)_0px_-4px_10px_0px]">
+          <div className="flex items-center gap-x-5">
+            <Button type="round">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 12H18"
+                  stroke="#303237"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </Button>
+            <span>1</span>
+            <Button type="round">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 12H18"
+                  stroke="#303237"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M12 18V6"
+                  stroke="#303237"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </Button>
+          </div>
+          <Button type={"primary"}>Add to order</Button>
         </div>
 
         <div
