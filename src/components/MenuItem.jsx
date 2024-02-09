@@ -13,7 +13,7 @@ const MenuItem = ({ pizza }) => {
         className="rounded-xl border-[1px] overflow-hidden cursor-pointer group"
         onClick={() => setShow(true)}
       >
-        <div className="h-60 w-full overflow-hidden w">
+        <div className="h-52 lg:h-60 w-full overflow-hidden w">
           <img
             src={imageUrl}
             alt="pizza"

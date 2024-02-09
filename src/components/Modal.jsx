@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { formatCurrency } from "../utils/formatters";
 import Button from "./Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { cartActionCreators } from "../redux/cart";
 
@@ -10,6 +10,7 @@ const Modal = ({ show, pizza, setShow }) => {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart)
 
   const { addToCart } = bindActionCreators(cartActionCreators, dispatch);
 
@@ -19,7 +20,7 @@ const Modal = ({ show, pizza, setShow }) => {
 
   const decreaseAmount = () => {
     setValue((prev) => {
-      if (prev === 1) {
+      if (prev === 1) {un
         return prev;
       } else {
         return prev - 1;
@@ -31,8 +32,11 @@ const Modal = ({ show, pizza, setShow }) => {
     const newItem = {
       id,
       name,
-      
+      quantity: value,
+      unitPrice,
+      totalPrice: unitPrice * value
     }
+    addToCart(newItem)
   }
 
   useEffect(() => {
@@ -45,14 +49,19 @@ const Modal = ({ show, pizza, setShow }) => {
     };
   }, []);
 
+  console.log("CAAAAAAAAAAAAAAARRRRRRRRRTTTT",cart)
+
   return (
     <div
-      className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex justify-center items-center overscroll-none overflow-hidden"
+      className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex justify-center items-end sm:items-center overscroll-none overflow-hidden"
       style={{ zIndex: 2000 }}
+      onClick={() => setShow(false)}
     >
-      <main className="min-w-[30rem] bg-white relative">
+      <main className="w-full sm:max-w-[30rem] bg-white relative rounded-3xl">
         <div className="mx-5 my-5">
-          <img src={imageUrl} alt="pizza" className="w-full h-72" />
+          <div className="w-full h-72 overflow-hidden rounded-t-2xl">
+          <img src={imageUrl} alt="pizza" className="w-full h-full" />
+          </div>
           <div className=" py-4 space-y-3">
             <div className="flex justify-between">
               <h3 className="text-base font-bold">{name}</h3>
