@@ -1,9 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { formatCurrency } from "../utils/formatters";
 import Button from "./Button";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { cartActionCreators } from "../redux/cart";
 
 const Modal = ({ show, pizza, setShow }) => {
+  const [value, setValue] = useState(1);
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+
+  const dispatch = useDispatch();
+
+  const { addToCart } = bindActionCreators(cartActionCreators, dispatch);
+
+  const increaseAmount = () => {
+    setValue((prev) => prev + 1);
+  };
+
+  const decreaseAmount = () => {
+    setValue((prev) => {
+      if (prev === 1) {
+        return prev;
+      } else {
+        return prev - 1;
+      }
+    });
+  };
+
+  const handleAddToCart = () => {
+    const newItem = {
+      id,
+      name,
+      
+    }
+  }
 
   useEffect(() => {
     // Disable scrolling on the body when the modal is mounted
@@ -43,7 +73,7 @@ const Modal = ({ show, pizza, setShow }) => {
 
         <div className="flex justify-between px-5 py-6 shadow-[rgba(50,50,71,.05)_0px_-4px_10px_0px]">
           <div className="flex items-center gap-x-5">
-            <Button type="round">
+            <Button type="round" onClick={decreaseAmount}>
               <svg
                 width="24"
                 height="24"
@@ -60,8 +90,8 @@ const Modal = ({ show, pizza, setShow }) => {
                 ></path>
               </svg>
             </Button>
-            <span>1</span>
-            <Button type="round">
+            <span>{value}</span>
+            <Button type="round" onClick={increaseAmount}>
               <svg
                 width="24"
                 height="24"
@@ -86,7 +116,7 @@ const Modal = ({ show, pizza, setShow }) => {
               </svg>
             </Button>
           </div>
-          <Button type={"primary"}>Add to order</Button>
+          <Button type={"primary"} onClick={handleAddToCart} >Add to order</Button>
         </div>
 
         <div
