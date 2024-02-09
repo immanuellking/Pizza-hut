@@ -2,9 +2,11 @@ import React from "react";
 import { LuShoppingCart } from "react-icons/lu";
 import { FiSearch } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const cart = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   return (
     <header className="w-full shadow-md flex items-center">
@@ -27,13 +29,13 @@ const Header = () => {
         </form>
 
         <div className="flex items-center h-0 justify-center hover:cursor-pointer absolute top-5 right-0  lg:static">
-          <div className="relative">
+          <div className="relative" onClick={() => navigate("/cart")}>
             <LuShoppingCart size={27} />
             {cart.length ? (
               <div className="h-5 w-5 bg-red-500 text-white text-[10px] flex justify-center items-center rounded-full absolute -top-2 -right-1 ">
                 {cart.length}
               </div>
-            ): null}
+            ) : null}
           </div>
         </div>
       </div>
