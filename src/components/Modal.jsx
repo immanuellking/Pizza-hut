@@ -11,7 +11,6 @@ const Modal = ({ show, pizza, setShow }) => {
 
   const dispatch = useDispatch();
 
-
   const { addToCart } = bindActionCreators(cartActionCreators, dispatch);
 
   const increaseAmount = () => {
@@ -20,7 +19,8 @@ const Modal = ({ show, pizza, setShow }) => {
 
   const decreaseAmount = () => {
     setValue((prev) => {
-      if (prev === 1) {un
+      if (prev === 1) {
+        un;
         return prev;
       } else {
         return prev - 1;
@@ -34,10 +34,11 @@ const Modal = ({ show, pizza, setShow }) => {
       name,
       quantity: value,
       unitPrice,
-      totalPrice: unitPrice * value
-    }
-    addToCart(newItem)
-  }
+      totalPrice: unitPrice * value,
+    };
+    addToCart(newItem);
+    setShow(false);
+  };
 
   useEffect(() => {
     // Disable scrolling on the body when the modal is mounted
@@ -49,8 +50,6 @@ const Modal = ({ show, pizza, setShow }) => {
     };
   }, []);
 
- 
-
   return (
     <div
       className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex justify-center items-end sm:items-center overscroll-none overflow-hidden"
@@ -60,7 +59,7 @@ const Modal = ({ show, pizza, setShow }) => {
       <main className="w-full sm:max-w-[30rem] bg-white relative rounded-3xl">
         <div className="mx-5 my-5">
           <div className="w-full h-72 overflow-hidden rounded-t-2xl">
-          <img src={imageUrl} alt="pizza" className="w-full h-full" />
+            <img src={imageUrl} alt="pizza" className="w-full h-full" />
           </div>
           <div className=" py-4 space-y-3">
             <div className="flex justify-between">
@@ -125,7 +124,9 @@ const Modal = ({ show, pizza, setShow }) => {
               </svg>
             </Button>
           </div>
-          <Button type={"primary"} onClick={handleAddToCart} >Add to order</Button>
+          <Button type={"primary"} onClick={handleAddToCart}>
+            Add to order
+          </Button>
         </div>
 
         <div

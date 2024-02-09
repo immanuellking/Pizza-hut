@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const Menu = () => {
   const menu = useLoaderData();
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart);
   console.log("CAAAAAAAAAAAAAAARRRRRRRRRTTTT",cart)
   return <ul className="w-[90%] mx-auto my-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
     {menu.map((pizza) => (
