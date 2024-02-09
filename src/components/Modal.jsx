@@ -10,8 +10,6 @@ const Modal = ({ show, pizza, setShow }) => {
   const [value, setValue] = useState(1);
   const { id, name, unitPrice, ingredients, imageUrl } = pizza;
 
-  console.log(ingredients)
-
   const dispatch = useDispatch();
 
   const { addToCart } = bindActionCreators(cartActionCreators, dispatch);

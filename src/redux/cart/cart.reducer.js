@@ -2,10 +2,13 @@ import {
   ADD_TO_CART,
   INCREASE_ITEM_QUANTITY,
   DECREASE_ITEM_QUANTITY,
+  DELETE_ITEM_FROM_CART,
+  GET_CART_TOTAL_PRICE,
 } from "./type";
 
 const initialState = {
   cart: [],
+  totalCartPrice: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -65,8 +68,19 @@ const reducer = (state = initialState, action) => {
             : item
         );
       }
-
       return { cart: updatedCartDec };
+
+    case DELETE_ITEM_FROM_CART:
+      const updatedCartDel = state.cart.filter(
+        (item) => item.id !== action.payload
+      );
+
+      return { cart: updatedCartDel };
+
+    case GET_CART_TOTAL_PRICE:
+      const total = state.cart.reduce((acc, cur) => acc + cur.totalPrice, 0);
+
+      return { ...state, totalCartPrice: total };
 
     default:
       return state;

@@ -9,7 +9,10 @@ const Cart = () => {
   return (
     <div className="w-[70%] mx-auto mt-10">
       <div className="w-full flex items-center justify-center relative  mb-20">
-        <div className="flex items-center absolute left-0 cursor-pointer" onClick={() => navigate(-1)}>
+        <div
+          className="flex items-center absolute left-0 cursor-pointer"
+          onClick={() => navigate(-1)}
+        >
           <svg
             width="28"
             height="10"
@@ -33,6 +36,13 @@ const Cart = () => {
             <CartItem key={item.id} item={item} />
           ))}
         </ul>
+
+        <div>
+          <div>
+            <h3>Subtotal</h3>
+            <p>{cart.length} items</p>
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -11,11 +11,8 @@ const CartItem = ({ item }) => {
 
   const dispatch = useDispatch();
 
-  console.log("ingredients cart item", ingredients);
-  const { increaseItemQuantity, decreaseItemQuantity } = bindActionCreators(
-    cartActionCreators,
-    dispatch
-  );
+  const { increaseItemQuantity, decreaseItemQuantity, deleteItemFromCart } =
+    bindActionCreators(cartActionCreators, dispatch);
 
   const increaseAmount = () => {
     increaseItemQuantity(id);
@@ -23,6 +20,10 @@ const CartItem = ({ item }) => {
 
   const decreaseAmount = () => {
     decreaseItemQuantity(id);
+  };
+
+  const deleteItem = () => {
+    deleteItemFromCart(id);
   };
 
   return (
@@ -54,7 +55,9 @@ const CartItem = ({ item }) => {
           decreaseAmount={decreaseAmount}
         />
         <div>
-          <Button type={"primary"}>Delete</Button>
+          <Button type={"primary"} onClick={deleteItem}>
+            Delete
+          </Button>
         </div>
       </div>
     </li>
