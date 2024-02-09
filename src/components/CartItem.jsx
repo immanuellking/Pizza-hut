@@ -2,10 +2,29 @@ import React from "react";
 import UpdateItemCart from "./UpdateItemCart";
 import Button from "./Button";
 import { formatCurrency } from "../utils/formatters";
+import { bindActionCreators } from "redux";
+import { cartActionCreators } from "../redux/cart";
+import { useDispatch } from "react-redux";
 
 const CartItem = ({ item }) => {
-  const { name, quantity, totalPrice, imageUrl, ingredients } = item;
+  const { id, name, quantity, totalPrice, imageUrl, ingredients } = item;
+
+  const dispatch = useDispatch();
+
   console.log("ingredients cart item", ingredients);
+  const { increaseItemQuantity, decreaseItemQuantity } = bindActionCreators(
+    cartActionCreators,
+    dispatch
+  );
+
+  const increaseAmount = () => {
+    increaseItemQuantity(id);
+  };
+
+  const decreaseAmount = () => {
+    decreaseItemQuantity(id);
+  };
+
   return (
     <li className="flex justify-between border-b-[1px] border-gray-200 pb-4">
       <div className="flex gap-x-4">
@@ -29,7 +48,11 @@ const CartItem = ({ item }) => {
       </div>
 
       <div className="flex items-center gap-x-4">
-        <UpdateItemCart value={quantity} />
+        <UpdateItemCart
+          value={quantity}
+          increaseAmount={increaseAmount}
+          decreaseAmount={decreaseAmount}
+        />
         <div>
           <Button type={"primary"}>Delete</Button>
         </div>
