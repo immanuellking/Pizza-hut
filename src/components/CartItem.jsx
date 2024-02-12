@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import { cartActionCreators } from "../redux/cart";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, calcTotal }) => {
   const { id, name, quantity, totalPrice, imageUrl, ingredients } = item;
 
   const dispatch = useDispatch();
@@ -16,14 +16,17 @@ const CartItem = ({ item }) => {
 
   const increaseAmount = () => {
     increaseItemQuantity(id);
+    calcTotal();
   };
 
   const decreaseAmount = () => {
     decreaseItemQuantity(id);
+    calcTotal();
   };
 
   const deleteItem = () => {
     deleteItemFromCart(id);
+    calcTotal();
   };
 
   return (

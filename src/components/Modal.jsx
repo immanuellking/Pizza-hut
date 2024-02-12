@@ -21,7 +21,6 @@ const Modal = ({ show, pizza, setShow }) => {
   const decreaseAmount = () => {
     setValue((prev) => {
       if (prev === 1) {
-        un;
         return prev;
       } else {
         return prev - 1;
