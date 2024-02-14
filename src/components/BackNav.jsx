@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const BackNav = ({ title }) => {
+  const navigate = useNavigate();
   return (
-    <div className="w-full flex items-center justify-center relative mb-20">
+    <div className="w-full flex items-center justify-center relative mb-10 sm:mb-16 lg:mb-20">
       <div
         className="flex items-center absolute left-0 cursor-pointer"
         onClick={() => navigate(-1)}
@@ -19,7 +21,7 @@ const BackNav = ({ title }) => {
             fill="black"
           ></path>
         </svg>
-        <div className="ml-4">Back</div>
+        <div className="ml-2 sm:ml-4">Back</div>
       </div>
       <h1 className="text-center text-3xl font-semibold">{title}</h1>
     </div>

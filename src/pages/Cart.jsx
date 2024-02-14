@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../components/CartItem";
-import { useNavigate } from "react-router-dom";
 import { cartActionCreators } from "../redux/cart";
 import { bindActionCreators } from "redux";
 import { formatCurrency } from "../utils/formatters";
@@ -11,7 +10,6 @@ import BackNav from "../components/BackNav";
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const totalCartPrice = useSelector((state) => state.totalCartPrice);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { getCartTotalPrice } = bindActionCreators(
     cartActionCreators,
@@ -28,7 +26,7 @@ const Cart = () => {
 
   console.log("Total Price!!!", totalCartPrice);
   return (
-    <div className="w-[70%] mx-auto my-10">
+    <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 sm:my-10">
       <BackNav title="My Order" />
 
       <main className="w-full">
@@ -40,8 +38,8 @@ const Cart = () => {
 
         <div className="w-full mt-10 flex justify-between">
           <div className="flex gap-x-1">
-            <h3 className="font-semibold">Subtotal</h3>
-            <p className="text-gray-400">
+            <h3 className="font-semibold text-lg">Subtotal</h3>
+            <p className="text-gray-400 text-lg">
               ({cart.length} meal{cart.length > 1 ? "s" : ""})
             </p>
           </div>
@@ -51,7 +49,9 @@ const Cart = () => {
         </div>
 
         <div className="w-full flex justify-center mt-5">
-          <Button type="secondary">Proceed To Checkout</Button>
+          <Button type="secondary" to="/checkout">
+            Proceed To Checkout
+          </Button>
         </div>
       </main>
     </div>

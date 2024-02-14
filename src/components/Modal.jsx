@@ -58,7 +58,7 @@ const Modal = ({ show, pizza, setShow }) => {
       style={{ zIndex: 2000 }}
       // onClick={() => setShow(false)}
     >
-      <main className="w-full sm:max-w-[30rem] bg-white relative rounded-3xl">
+      <main className="w-full sm:max-w-[30rem] bg-white relative rounded-t-3xl sm:rounded-3xl">
         <div className="mx-5 my-5">
           <div className="w-full h-72 overflow-hidden rounded-t-2xl">
             <img src={imageUrl} alt="pizza" className="w-full h-full" />
@@ -82,7 +82,11 @@ const Modal = ({ show, pizza, setShow }) => {
         </div>
 
         <div className="flex justify-between px-5 py-6 shadow-[rgba(50,50,71,.05)_0px_-4px_10px_0px]">
-          <UpdateItemCart increaseAmount={increaseAmount} decreaseAmount={decreaseAmount} value={value} />
+          <UpdateItemCart
+            increaseAmount={increaseAmount}
+            decreaseAmount={decreaseAmount}
+            value={value}
+          />
           <Button type={"primary"} onClick={handleAddToCart}>
             Add to order
           </Button>

@@ -3,7 +3,7 @@ import Button from "./Button";
 
 const UpdateItemCart = ({ increaseAmount, decreaseAmount, value }) => {
   return (
-    <div className="flex items-center gap-x-5">
+    <div className="flex items-center gap-x-2 sm:gap-x-5">
       <Button type="round" onClick={decreaseAmount}>
         <svg
           width="24"
