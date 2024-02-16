@@ -30,7 +30,7 @@ const Modal = ({ show, pizza, setShow }) => {
 
   const handleAddToCart = () => {
     const newItem = {
-      id,
+      pizzaId: id,
       name,
       imageUrl,
       ingredients,

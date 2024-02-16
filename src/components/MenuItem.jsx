@@ -3,7 +3,7 @@ import { formatCurrency } from "../utils/formatters";
 import Modal from "./Modal";
 
 const MenuItem = ({ pizza }) => {
-  const {  name, unitPrice, ingredients, imageUrl } = pizza;
+  const { name, unitPrice, ingredients, imageUrl } = pizza;
 
   const [show, setShow] = useState(false);
 
