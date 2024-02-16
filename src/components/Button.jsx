@@ -24,6 +24,13 @@ const Button = ({ children, type, onClick, to }) => {
       </button>
     );
   }
+
+  return (
+    <button className={styles[type]}>
+      {children}
+    </button>
+  );
+
 };
 
 export default Button;
