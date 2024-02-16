@@ -3,6 +3,7 @@ import BackNav from "../components/BackNav";
 import Button from "../components/Button";
 import { Form, useActionData } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { createOrder } from "../services/apiRestaurant";
 
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
@@ -19,12 +20,14 @@ export async function action({ request }) {
   };
 
   const errors = {};
-  if (!isValidPhone(order.phone_no))
+  if (!isValidPhone(order.phone))
     errors.phone = "Enter a Valid Phone number";
 
   if (Object.keys(errors).length > 0) return errors;
-  console.log(order);
-  return order;
+
+  const newOrder = await createOrder(order);
+  console.log(newOrder)
+  return newOrder;
 }
 
 const Checkout = () => {
@@ -49,7 +52,7 @@ const Checkout = () => {
                 type="text"
                 placeholder="John James"
                 aria-label="Full Name"
-                name="full_name"
+                name="customer"
                 className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500"
                 required
               />
@@ -105,7 +108,7 @@ const Checkout = () => {
                   placeholder="912 345 6789"
                   aria-label="Email Address"
                   className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500 w-full"
-                  name="phone_no"
+                  name="phone"
                   required
                 />
               </div>
@@ -123,7 +126,7 @@ const Checkout = () => {
                 placeholder="23, Landmark Street, Lekki, Lagos"
                 aria-label="Delivery Address"
                 className="border-[2px] border-[#EEEFF2] rounded-lg focus:outline-[#aca9a9]  px-2 py-2.5 valid:border-green-500"
-                name="delivery_address"
+                name="address"
                 required
               />
             </div>
