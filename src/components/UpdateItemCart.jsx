@@ -15,9 +15,9 @@ const UpdateItemCart = ({ increaseAmount, decreaseAmount, value }) => {
           <path
             d="M6 12H18"
             stroke="#303237"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
         </svg>
       </Button>
@@ -33,16 +33,16 @@ const UpdateItemCart = ({ increaseAmount, decreaseAmount, value }) => {
           <path
             d="M6 12H18"
             stroke="#303237"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M12 18V6"
             stroke="#303237"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
         </svg>
       </Button>
