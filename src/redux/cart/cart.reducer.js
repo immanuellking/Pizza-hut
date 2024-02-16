@@ -4,6 +4,7 @@ import {
   DECREASE_ITEM_QUANTITY,
   DELETE_ITEM_FROM_CART,
   GET_CART_TOTAL_PRICE,
+  CLEAR_CART,
 } from "./type";
 
 const initialState = {
@@ -32,6 +33,7 @@ const reducer = (state = initialState, action) => {
         updatedCartAdd = [...state.cart, action.payload];
       }
       return { cart: updatedCartAdd };
+
     case INCREASE_ITEM_QUANTITY:
       const currentItemInc = state.cart.find(
         (item) => item.pizzaId === action.payload
@@ -74,13 +76,14 @@ const reducer = (state = initialState, action) => {
       const updatedCartDel = state.cart.filter(
         (item) => item.pizzaId !== action.payload
       );
-
       return { cart: updatedCartDel };
 
     case GET_CART_TOTAL_PRICE:
       const total = state.cart.reduce((acc, cur) => acc + cur.totalPrice, 0);
-
       return { ...state, totalCartPrice: total };
+
+    case CLEAR_CART:
+      return { cart: [], totalCartPrice: 0 };
 
     default:
       return state;

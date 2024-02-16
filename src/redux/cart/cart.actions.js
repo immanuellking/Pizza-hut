@@ -4,6 +4,7 @@ import {
   DECREASE_ITEM_QUANTITY,
   DELETE_ITEM_FROM_CART,
   GET_CART_TOTAL_PRICE,
+  CLEAR_CART,
 } from "./type";
 
 export const addToCart = (pizza) => {
@@ -37,5 +38,11 @@ export const deleteItemFromCart = (id) => {
 export const getCartTotalPrice = () => {
   return {
     type: GET_CART_TOTAL_PRICE,
+  };
+};
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
   };
 };
