@@ -31,6 +31,8 @@ const Checkout = () => {
   const [priority, setPriority] = useState(false);
   const cart = useSelector((state) => state.cart);
 
+  const formErrors = useActionData();
+
   return (
     <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 sm:my-10">
       <BackNav title="Checkout" />
@@ -107,6 +109,11 @@ const Checkout = () => {
                   required
                 />
               </div>
+              {formErrors?.phone && (
+                <p className="text-xs mt-2 text-red-700 bg-red-100 p-2 rounded-md">
+                  {formErrors.phone}
+                </p>
+              )}
             </div>
 
             <div className="flex flex-col gap-y-2">
