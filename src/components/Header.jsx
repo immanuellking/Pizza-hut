@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="w-full shadow-md flex items-center">
       <div className="w-[90%] my-5 mx-auto flex flex-col items-start lg:flex-row lg:items-center justify-start lg:justify-between gap-y-8 lg:gap-y-0 relative">
-        <div className="text-lg hover:cursor-pointer">
+        <div className="text-lg hover:cursor-pointer" onClick={() => navigate("/")}>
           Pizza-<span className="text-[#FFCB00] text-2xl font-bold">HUT</span>
         </div>
 
