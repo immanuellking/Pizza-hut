@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import BackNav from "../components/BackNav";
 import Button from "../components/Button";
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
@@ -10,18 +11,35 @@ const isValidPhone = (str) =>
 
 export async function action({ request }) {
   const awaitedData = await request.formData();
-  console.log(awaitedData);
+  const data = Object.fromEntries(awaitedData);
+  const order = {
+    ...data,
+    cart: JSON.parse(data.cart),
+    priority: data.priority === "true",
+  };
+
+  const errors = {};
+  if (!isValidPhone(order.phone_no))
+    errors.phone = "Enter a Valid Phone number";
+
+  if (Object.keys(errors).length > 0) return errors;
+  console.log(order);
+  return order;
 }
 
 const Checkout = () => {
   const [priority, setPriority] = useState(false);
+  const cart = useSelector((state) => state.cart);
+
   return (
     <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 sm:my-10">
       <BackNav title="Checkout" />
 
       <main className="sm:w-[80%] lg:w-[70%] mx-auto">
-        <h1 className="text-xl font-bold mb-5 text-center sm:text-left">Delivery Information</h1>
-        <Form>
+        <h1 className="text-xl font-bold mb-5 text-center sm:text-left">
+          Delivery Information
+        </h1>
+        <Form method="post">
           <div className="space-y-6">
             <div className="flex flex-col gap-y-2">
               <label>Full Name</label>
@@ -49,7 +67,7 @@ const Checkout = () => {
 
             <div className="flex flex-col gap-y-2">
               <label>Phone Number</label>
-              <div className="w-full flex gap-x-4">
+              <div className="w-full flex gap-x-2 sm:gap-x-4">
                 <div className="flex items-center border-[1px] px-4 space-x-3 rounded-lg">
                   <img
                     alt="Ngn"
@@ -72,10 +90,10 @@ const Checkout = () => {
                       <path
                         d="M13.28 5.96667L8.9333 10.3133C8.41997 10.8267 7.57997 10.8267 7.06664 10.3133L2.71997 5.96667"
                         stroke="#7E8494"
-                        stroke-width="1.5"
-                        stroke-miterlimit="10"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       ></path>
                     </svg>
                   </span>
@@ -116,6 +134,7 @@ const Checkout = () => {
                 Give your order priority ?
               </label>
             </div>
+            <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           </div>
 
           <div className="flex justify-center mt-10">
