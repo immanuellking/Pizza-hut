@@ -16,11 +16,11 @@ const reducer = (state = initialState, action) => {
     case ADD_TO_CART:
       let updatedCartAdd;
       const itemExist = state.cart.find((item) =>
-        item.id === action.payload.id ? item : null
+        item.pizzaId === action.payload.id ? item : null
       );
       if (itemExist) {
         updatedCartAdd = state.cart.map((item) =>
-          item.id === itemExist.id
+          item.pizzaId === itemExist.pizzaId
             ? {
                 ...item,
                 quantity: item.quantity + action.payload.quantity,
@@ -34,10 +34,10 @@ const reducer = (state = initialState, action) => {
       return { cart: updatedCartAdd };
     case INCREASE_ITEM_QUANTITY:
       const currentItemInc = state.cart.find(
-        (item) => item.id === action.payload
+        (item) => item.pizzaId === action.payload
       );
       const updatedCartInc = state.cart.map((item) =>
-        item.id === currentItemInc.id
+        item.pizzaId === currentItemInc.pizzaId
           ? {
               ...item,
               quantity: item.quantity + 1,
@@ -51,15 +51,15 @@ const reducer = (state = initialState, action) => {
       let updatedCartDec;
 
       const currentItemDec = state.cart.find(
-        (item) => item.id === action.payload
+        (item) => item.pizzaId === action.payload
       );
       if (currentItemDec.quantity === 1) {
         updatedCartDec = state.cart.filter(
-          (item) => item.id !== currentItemDec.id
+          (item) => item.pizzaId !== currentItemDec.pizzaId
         );
       } else {
         updatedCartDec = state.cart.map((item) =>
-          item.id === currentItemDec.id
+          item.id === currentItemDec.pizzaId
             ? {
                 ...item,
                 quantity: item.quantity - 1,
@@ -72,7 +72,7 @@ const reducer = (state = initialState, action) => {
 
     case DELETE_ITEM_FROM_CART:
       const updatedCartDel = state.cart.filter(
-        (item) => item.id !== action.payload
+        (item) => item.pizzaId !== action.payload
       );
 
       return { cart: updatedCartDel };
