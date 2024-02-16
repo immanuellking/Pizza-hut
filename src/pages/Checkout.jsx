@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import BackNav from "../components/BackNav";
 import Button from "../components/Button";
 
 const Checkout = () => {
+  const [priority, setPriority] = useState(false);
   return (
     <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 sm:my-10">
       <BackNav title="Checkout" />
@@ -17,7 +18,7 @@ const Checkout = () => {
               placeholder="John James"
               aria-label="Full Name"
               name="full_name"
-              className="border-[1.5px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[1.5 px] focus:outline-[#aca9a9] required:border-red-500"
+              className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500"
               required
             />
           </div>
@@ -28,8 +29,9 @@ const Checkout = () => {
               type="email"
               placeholder="example@gmail.com"
               aria-label="Email Address"
-              className="border-[1.5px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[1.5 px] focus:outline-[#aca9a9] required:border-red-500"
+              className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500"
               name="email_address"
+              required
             />
           </div>
 
@@ -70,8 +72,9 @@ const Checkout = () => {
                 type="tel"
                 placeholder="912 345 6789"
                 aria-label="Email Address"
-                className="border-[1.5px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[1.5 px] focus:outline-[#aca9a9] required:border-red-500 w-full"
+                className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500 w-full"
                 name="phone_no"
+                required
               />
             </div>
           </div>
@@ -82,9 +85,22 @@ const Checkout = () => {
               type="text"
               placeholder="23, Landmark Street, Lekki, Lagos"
               aria-label="Delivery Address"
-              className="border-[1.5px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[1.5 px] focus:outline-[#aca9a9] required:border-red-500"
+              className="border-[2px] border-[#EEEFF2] rounded-lg focus:outline-[#aca9a9]  px-2 py-2.5 valid:border-green-500"
               name="delivery_address"
+              required
             />
+          </div>
+
+          <div className="flex items-center gap-x-3">
+            <input
+              type="checkbox"
+              aria-label="priority"
+              value={priority}
+              onChange={(e) => setPriority(e.target.checked)}
+              name="priority"
+              className="h-6 w-6 cursor-pointer checked:accent-black"
+            />
+            <label className="text-lg font-semibold">Give your order priority ?</label>
           </div>
 
           <div className="flex justify-center mt-5">
