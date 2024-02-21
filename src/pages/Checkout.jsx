@@ -1,40 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackNav from "../components/BackNav";
 import Button from "../components/Button";
-import { Form, useActionData } from "react-router-dom";
+// import { Form, useActionData } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { createOrder } from "../services/apiRestaurant";
+// import { createOrder } from "../services/apiRestaurant";
+// import { store } from "../redux/store";
+// import { clearCart } from "../redux/cart/cart.actions";
+import PayButton from "../components/PayButton";
 
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str
   );
 
-export async function action({ request }) {
-  const awaitedData = await request.formData();
-  const data = Object.fromEntries(awaitedData);
-  const order = {
-    ...data,
-    cart: JSON.parse(data.cart),
-    priority: data.priority === "true",
-  };
+// export async function action({ request }) {
+//   const awaitedData = await request.formData();
+//   const data = Object.fromEntries(awaitedData);
+//   const order = {
+//     ...data,
+//     cart: JSON.parse(data.cart),
+//     priority: data.priority === "true",
+//   };
 
-  const errors = {};
-  if (!isValidPhone(order.phone))
-    errors.phone = "Enter a Valid Phone number";
+//   const errors = {};
+//   if (!isValidPhone(order.phone)) errors.phone = "Enter a Valid Phone number";
 
-  if (Object.keys(errors).length > 0) return errors;
+//   if (Object.keys(errors).length > 0) return errors;
 
-  const newOrder = await createOrder(order);
-  console.log(newOrder)
-  return newOrder;
-}
+//   const newOrder = await createOrder(order);
+//   // store.dispatch(clearCart());
+//   // return redirect(`/order/${newOrder.id}`);
+//   return newOrder;
+// }
 
 const Checkout = () => {
   const [priority, setPriority] = useState(false);
+  const [email, setEmail] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
   const cart = useSelector((state) => state.cart);
+  const totalCartPrice = useSelector((state) => state.totalCartPrice);
 
-  const formErrors = useActionData();
+  // const formErrors = useActionData();
+
+  const CheckPhone = (val) => {
+    if (val.length && !isValidPhone(val)) {
+      setError("Enter a Valid Phone number");
+    } else {
+      setError("");
+    }
+  };
+
+  useEffect(() => {
+    CheckPhone(phone);
+  }, [phone]);
 
   return (
     <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 sm:my-10">
@@ -44,7 +65,7 @@ const Checkout = () => {
         <h1 className="text-xl font-bold mb-5 text-center sm:text-left">
           Delivery Information
         </h1>
-        <Form method="post">
+        <form>
           <div className="space-y-6">
             <div className="flex flex-col gap-y-2">
               <label>Full Name</label>
@@ -53,6 +74,8 @@ const Checkout = () => {
                 placeholder="John James"
                 aria-label="Full Name"
                 name="customer"
+                value={customer}
+                onChange={(e) => setCustomer(e.target.value)}
                 className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500"
                 required
               />
@@ -66,6 +89,8 @@ const Checkout = () => {
                 aria-label="Email Address"
                 className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500"
                 name="email_address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -106,15 +131,17 @@ const Checkout = () => {
                 <input
                   type="tel"
                   placeholder="912 345 6789"
-                  aria-label="Email Address"
+                  aria-label="Phone"
                   className="border-[2px] border-[#EEEFF2] rounded-lg  px-2 py-2.5 focus:outline-[#aca9a9] valid:border-green-500 w-full"
                   name="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   required
                 />
               </div>
-              {formErrors?.phone && (
+              {error && (
                 <p className="text-xs mt-2 text-red-700 bg-red-100 p-2 rounded-md">
-                  {formErrors.phone}
+                  {error}
                 </p>
               )}
             </div>
@@ -127,6 +154,8 @@ const Checkout = () => {
                 aria-label="Delivery Address"
                 className="border-[2px] border-[#EEEFF2] rounded-lg focus:outline-[#aca9a9]  px-2 py-2.5 valid:border-green-500"
                 name="address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 required
               />
             </div>
@@ -144,13 +173,26 @@ const Checkout = () => {
                 Give your order priority ?
               </label>
             </div>
-            <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+            {/* <input type="hidden" name="cart" value={JSON.stringify(cart)} /> */}
           </div>
 
-          <div className="flex justify-center mt-10">
-            <Button type="secondary">Checkout</Button>
-          </div>
-        </Form>
+          {customer && address && phone && email ? (
+            <div className="flex justify-center mt-10">
+              <PayButton
+                amount={totalCartPrice * 2000}
+                email={email}
+                cart={cart}
+                phone={phone}
+              />
+            </div>
+          ) : (
+            <div className="flex justify-center mt-10">
+              <Button disabled={true} type="disabled">
+                Checkout
+              </Button>
+            </div>
+          )}
+        </form>
       </main>
     </div>
   );
