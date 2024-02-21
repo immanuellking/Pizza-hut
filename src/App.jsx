@@ -3,7 +3,8 @@ import AppLayout from "./pages/AppLayout";
 import Menu, { loader as menuLoader } from "./pages/Menu";
 import Error from "./pages/Error";
 import Cart from "./pages/Cart";
-import Checkout, { action as checkoutAction } from "./pages/Checkout";
+import Checkout from "./pages/Checkout";
+import Order from "./pages/Order";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
           {
             path: "/checkout",
             element: <Checkout />,
-            action: checkoutAction,
+            // action: checkoutAction,
+          },
+          {
+            path: "/order/:orderId",
+            element: <Order />,
           },
         ],
       },
