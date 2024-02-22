@@ -27,7 +27,7 @@ const PayButton = ({
   };
 
   const createNewOrder = async () => {
-    const order = { total: amount, customer, cart, address, phone, priority };
+    const order = { customer, cart, address, phone, priority };
     const newOrder = await createOrder(order);
     console.log(newOrder);
     alert("Successfull");
