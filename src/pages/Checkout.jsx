@@ -1,37 +1,13 @@
 import React, { useEffect, useState } from "react";
 import BackNav from "../components/BackNav";
 import Button from "../components/Button";
-// import { Form, useActionData } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { createOrder } from "../services/apiRestaurant";
-// import { store } from "../redux/store";
-// import { clearCart } from "../redux/cart/cart.actions";
 import PayButton from "../components/PayButton";
 
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str
   );
-
-// export async function action({ request }) {
-//   const awaitedData = await request.formData();
-//   const data = Object.fromEntries(awaitedData);
-//   const order = {
-//     ...data,
-//     cart: JSON.parse(data.cart),
-//     priority: data.priority === "true",
-//   };
-
-//   const errors = {};
-//   if (!isValidPhone(order.phone)) errors.phone = "Enter a Valid Phone number";
-
-//   if (Object.keys(errors).length > 0) return errors;
-
-//   const newOrder = await createOrder(order);
-//   // store.dispatch(clearCart());
-//   // return redirect(`/order/${newOrder.id}`);
-//   return newOrder;
-// }
 
 const Checkout = () => {
   const [priority, setPriority] = useState(false);
@@ -65,7 +41,7 @@ const Checkout = () => {
         <h1 className="text-xl font-bold mb-5 text-center sm:text-left">
           Delivery Information
         </h1>
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="space-y-6">
             <div className="flex flex-col gap-y-2">
               <label>Full Name</label>
@@ -173,16 +149,18 @@ const Checkout = () => {
                 Give your order priority ?
               </label>
             </div>
-            {/* <input type="hidden" name="cart" value={JSON.stringify(cart)} /> */}
           </div>
 
           {customer && address && phone && email ? (
             <div className="flex justify-center mt-10">
               <PayButton
-                amount={totalCartPrice * 2000}
+                amount={totalCartPrice * 1750}
                 email={email}
                 cart={cart}
+                customer={customer}
+                address={address}
                 phone={phone}
+                priority={priority}
               />
             </div>
           ) : (
