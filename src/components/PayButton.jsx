@@ -1,13 +1,36 @@
 import React from "react";
 import { PaystackButton } from "react-paystack";
-import Button from "./Button";
+import { createOrder } from "../services/apiRestaurant";
+import { cartActionCreators } from "../redux/cart";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const PayButton = ({ amount, email }) => {
+const PayButton = ({
+  amount,
+  email,
+  cart,
+  customer,
+  address,
+  phone,
+  priority,
+}) => {
+  const dispatch = useDispatch();
+
+  const { clearCart } = bindActionCreators(cartActionCreators, dispatch);
+
   const publicKey = import.meta.env.VITE_PS_PUBLIC_KEY;
   //   const [reference, setReference] = React.useState("");
 
   const handlePaystackSuccessAction = (reference) => {
     // handle payment success
+    createNewOrder();
+  };
+
+  const createNewOrder = async () => {
+    const order = { total: amount, customer, cart, address, phone, priority };
+    const newOrder = await createOrder(order);
+    console.log(newOrder);
+    alert("Successfull");
   };
 
   const componentProps = {
