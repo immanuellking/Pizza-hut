@@ -4,6 +4,7 @@ import { createOrder } from "../services/apiRestaurant";
 import { cartActionCreators } from "../redux/cart";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
+import { useNavigate } from "react-router-dom";
 
 const PayButton = ({
   amount,
@@ -15,11 +16,12 @@ const PayButton = ({
   priority,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { clearCart } = bindActionCreators(cartActionCreators, dispatch);
 
-  const priorityPrice = priority ? Math.round(amount / cart.length) : 0;
-  console.log("PPPPP", priorityPrice)
+  const priorityPrice = priority ? Math.round(amount * 0.2) : 0;
+  console.log("PPPPP", priorityPrice);
 
   const publicKey = import.meta.env.VITE_PS_PUBLIC_KEY;
   //   const [reference, setReference] = React.useState("");
@@ -33,12 +35,13 @@ const PayButton = ({
     const order = { customer, cart, address, phone, priority };
     const newOrder = await createOrder(order);
     console.log(newOrder);
-    alert("Successfull");
+    clearCart();
+    navigate(`/order/${newOrder.id}`);
   };
 
   const componentProps = {
     email,
-    amount: (amount * 100) + priorityPrice,
+    amount: amount * 100 + priorityPrice,
     publicKey,
     text: "Checkout",
     onSuccess: (reference) => handlePaystackSuccessAction(reference),
