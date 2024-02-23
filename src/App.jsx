@@ -4,7 +4,7 @@ import Menu, { loader as menuLoader } from "./pages/Menu";
 import Error from "./pages/Error";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import Order from "./pages/Order";
+import Order, { loader as orderLoader } from "./pages/Order";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
           {
             path: "/order/:orderId",
             element: <Order />,
+            loader: orderLoader,
           },
         ],
       },
