@@ -2,21 +2,29 @@ import React, { useEffect } from "react";
 import { getOrder } from "../services/apiRestaurant";
 import { useLoaderData, useFetcher } from "react-router-dom";
 import { calcMinutesLeft } from "../utils/minutesLeft";
-import { formatDate } from "../utils/formatters";
+import { formatCurrency, formatDate } from "../utils/formatters";
 import OrderItem from "../components/OrderItem";
 
 const Order = () => {
   const order = useLoaderData();
   const fetcher = useFetcher();
 
-  const { id, status, estimatedDelivery, priority, cart } = order;
+  const {
+    id,
+    status,
+    estimatedDelivery,
+    priority,
+    cart,
+    orderPrice,
+    priorityPrice,
+  } = order;
 
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
   console.log(deliveryIn);
 
   useEffect(() => {
     if (!fetcher.data && fetcher.state === "idle") {
-      fetcher.load("/menu");
+      fetcher.load("/");
     }
   }, [fetcher]);
 
@@ -55,16 +63,42 @@ const Order = () => {
         <ul>
           {cart.map((item) => (
             <OrderItem
-              key={item.id}
+              key={item.pizzaId}
               item={item}
               isLoadingIngredients={fetcher.state === "loading"}
               ingredients={
-                fetcher?.data?.find((pizza) => pizza.id === item.id)
+                fetcher?.data?.find((pizza) => pizza.id === item.pizzaId)
                   .ingredients ?? []
               }
             />
           ))}
         </ul>
+      </div>
+
+      <div className="w-full bg-stone-200 px-4 py-4 space-y-4">
+        <div className="w-full flex justify-between">
+          <p className="font-medium italic text-lg">Pizza Price:</p>
+          <div className="flex items-center space-x-1">
+            <p className="font-bold text-lg">{formatCurrency(orderPrice)}</p>
+            <p className="text-gray-600">(NGN{(orderPrice * 1700).toLocaleString()})</p>
+          </div>
+        </div>
+        {priority && (
+          <div className="w-full flex justify-between">
+            <p className="font-medium italic text-lg">Priority Price:</p>
+            <div className="flex items-center space-x-1">
+              <p className="font-bold text-lg">{formatCurrency(orderPrice)}</p>
+              <p className="text-gray-600">(NGN{(priorityPrice * 1700).toLocaleString()})</p>
+            </div>
+          </div>
+        )}
+        <div className="w-full flex justify-between">
+          <p className="font-medium italic text-lg">Total Paid</p>
+          <div className="flex items-center space-x-1">
+            <p className="font-bold text-lg">{formatCurrency(orderPrice + priorityPrice)}</p>
+            <p className="text-gray-600">(NGN{((orderPrice + priorityPrice) * 1700).toLocaleString()})</p>
+          </div>
+        </div>
       </div>
     </div>
   );
