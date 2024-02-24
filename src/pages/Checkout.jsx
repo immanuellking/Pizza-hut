@@ -19,8 +19,6 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cart);
   const totalCartPrice = useSelector((state) => state.totalCartPrice);
 
-  // const formErrors = useActionData();
-
   const CheckPhone = (val) => {
     if (val.length && !isValidPhone(val)) {
       setError("Enter a Valid Phone number");
