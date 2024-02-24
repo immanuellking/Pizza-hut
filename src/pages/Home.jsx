@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full h-screen flex relative">
       <div className="w-[50%] h-full"></div>
@@ -28,7 +30,10 @@ const Home = () => {
             <p className="text-2xl font-[400] tracking-wider">
               Time to enjoy our delicious pizza.
             </p>
-            <button className="bg-green-600 hover:bg-green-500 text-lg px-5 py-2 font-semibold rounded-full text-white">
+            <button
+              className="bg-green-600 hover:bg-green-500 text-lg px-5 py-2 font-semibold rounded-full text-white"
+              onClick={() => navigate("/menu")}
+            >
               Order Now
             </button>
           </div>
