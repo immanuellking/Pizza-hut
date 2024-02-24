@@ -5,6 +5,7 @@ import Error from "./pages/Error";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Order, { loader as orderLoader } from "./pages/Order";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/",
+            element: <Home />,
+          },
+          {
+            path: "/menu",
             element: <Menu />,
             loader: menuLoader,
           },
