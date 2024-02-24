@@ -23,6 +23,8 @@ const PayButton = ({
   const priorityPrice = priority ? Math.round(amount * 0.2) : 0;
   console.log("PPPPP", priorityPrice);
 
+  const totalPrice = amount * 100 + priorityPrice;
+
   const publicKey = import.meta.env.VITE_PS_PUBLIC_KEY;
   //   const [reference, setReference] = React.useState("");
 
@@ -32,7 +34,7 @@ const PayButton = ({
   };
 
   const createNewOrder = async () => {
-    const order = { customer, cart, address, phone, priority };
+    const order = { customer, cart, address, phone, priority, totalPrice };
     const newOrder = await createOrder(order);
     console.log(newOrder);
     clearCart();
@@ -41,7 +43,7 @@ const PayButton = ({
 
   const componentProps = {
     email,
-    amount: amount * 100 + priorityPrice,
+    amount: totalPrice,
     publicKey,
     text: "Checkout",
     onSuccess: (reference) => handlePaystackSuccessAction(reference),
