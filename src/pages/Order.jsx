@@ -30,7 +30,7 @@ const Order = () => {
 
   return (
     <div className="w-[95%] sm:w-[90%] lg:w-[60%] mx-auto my-5 sm:my-10">
-      <div className="flex justify-between mb-8">
+      <div className="flex flex-col sm:flex-row gap-y-4 justify-between mb-8">
         <h2 className="text-lg font-semibold text-gray-500">
           Order<span className="text-xl font-bold text-black ml-2">#{id}</span>
         </h2>
@@ -50,7 +50,7 @@ const Order = () => {
         </div>
       </div>
 
-      <div className="flex justify-between items-center bg-black h-20 text-lg font-semibold text-white px-6">
+      <div className="flex flex-col sm:flex-row items-start justify-center gap-y-2 sm:justify-between sm:items-center bg-black h-20 text-lg font-semibold text-white px-2 sm:px-6">
         <p>
           {deliveryIn > 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 🛵`
@@ -75,12 +75,14 @@ const Order = () => {
         </ul>
       </div>
 
-      <div className="w-full bg-stone-200 px-4 py-4 space-y-4">
+      <div className="w-full bg-stone-200 px-2 sm:px-4 py-4 space-y-4">
         <div className="w-full flex justify-between">
           <p className="font-medium italic text-lg">Pizza Price:</p>
           <div className="flex items-center space-x-1">
             <p className="font-bold text-lg">{formatCurrency(orderPrice)}</p>
-            <p className="text-gray-600">(NGN{(orderPrice * 1700).toLocaleString()})</p>
+            <p className="text-gray-600">
+              (NGN{(orderPrice * 1700).toLocaleString()})
+            </p>
           </div>
         </div>
         {priority && (
@@ -88,15 +90,21 @@ const Order = () => {
             <p className="font-medium italic text-lg">Priority Price:</p>
             <div className="flex items-center space-x-1">
               <p className="font-bold text-lg">{formatCurrency(orderPrice)}</p>
-              <p className="text-gray-600">(NGN{(priorityPrice * 1700).toLocaleString()})</p>
+              <p className="text-gray-600">
+                (NGN{(priorityPrice * 1700).toLocaleString()})
+              </p>
             </div>
           </div>
         )}
         <div className="w-full flex justify-between">
           <p className="font-medium italic text-lg">Total Paid</p>
           <div className="flex items-center space-x-1">
-            <p className="font-bold text-lg">{formatCurrency(orderPrice + priorityPrice)}</p>
-            <p className="text-gray-600">(NGN{((orderPrice + priorityPrice) * 1700).toLocaleString()})</p>
+            <p className="font-bold text-lg">
+              {formatCurrency(orderPrice + priorityPrice)}
+            </p>
+            <p className="text-gray-600">
+              (NGN{(orderPrice * 1700 + priorityPrice * 1700).toLocaleString()})
+            </p>
           </div>
         </div>
       </div>
