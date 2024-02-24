@@ -9,7 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="w-full shadow-md flex items-center">
+    <header className="w-full shadow-md flex items-center fixed top-0 left-0 right-0 bg-white" style={{zIndex: 4000}}>
       <div className="w-[90%] my-5 mx-auto flex flex-col items-start lg:flex-row lg:items-center justify-start lg:justify-between gap-y-8 lg:gap-y-0 relative">
         <div
           className="text-lg hover:cursor-pointer"
