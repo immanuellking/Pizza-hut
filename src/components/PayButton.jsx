@@ -21,9 +21,8 @@ const PayButton = ({
   const { clearCart } = bindActionCreators(cartActionCreators, dispatch);
 
   const priorityPrice = priority ? Math.round(amount * 0.2) : 0;
-  console.log("PPPPP", priorityPrice);
 
-  const totalPrice = amount * 100 + priorityPrice;
+  const totalPrice =(amount * 1700) + (priorityPrice * 1700);
 
   const publicKey = import.meta.env.VITE_PS_PUBLIC_KEY;
   //   const [reference, setReference] = React.useState("");
@@ -43,12 +42,16 @@ const PayButton = ({
 
   const componentProps = {
     email,
-    amount: totalPrice,
+    amount: totalPrice * 100,
     publicKey,
     text: "Checkout",
     onSuccess: (reference) => handlePaystackSuccessAction(reference),
     onClose: () => alert("Payment canceled by user."),
   };
+
+  console.log("PPPPP", priorityPrice);
+  console.log("AAAAAA", amount);
+  console.log("TTTTT", totalPrice);
 
   return (
     <PaystackButton
