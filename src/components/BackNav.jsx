@@ -24,7 +24,7 @@ const BackNav = ({ title }) => {
         </svg>
         <div className="ml-2 sm:ml-4">Back</div>
       </div>
-      <h1 className="text-center text-4xl font-semibold italic">{title}</h1>
+      <h1 className="text-center text-3xl sm:text-4xl font-semibold italic">{title}</h1>
     </div>
   );
 };
