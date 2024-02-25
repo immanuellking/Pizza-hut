@@ -23,7 +23,7 @@ const Home = () => {
         }}
       >
         <div className=" w-full h-full flex flex-col items-center justify-center">
-          <div className="space-y-4 px-4 sm:px-2">
+          <div className="space-y-4 px-4 sm:px-4">
             <h1 className="text-5xl sm:text-6xl capitalize tracking-wide">
               We have the <span className="font-bold">best pizza!</span>
             </h1>
