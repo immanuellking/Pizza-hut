@@ -89,7 +89,7 @@ const Order = () => {
           <div className="w-full flex justify-between">
             <p className="font-medium italic text-lg">Priority Price:</p>
             <div className="flex items-center space-x-1">
-              <p className="font-bold text-lg">{formatCurrency(orderPrice)}</p>
+              <p className="font-bold text-lg">{formatCurrency(priorityPrice)}</p>
               <p className="text-gray-600">
                 (NGN{(priorityPrice * 1700).toLocaleString()})
               </p>
