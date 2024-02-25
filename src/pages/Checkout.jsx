@@ -32,11 +32,11 @@ const Checkout = () => {
   }, [phone]);
 
   return (
-    <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 sm:my-10">
+    <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 mt-44 sm:my-10 sm:mt-20">
       <BackNav title="Checkout" />
 
       <main className="sm:w-[80%] lg:w-[70%] mx-auto">
-        <h1 className="text-xl font-bold mb-5 text-center sm:text-left">
+        <h1 className="text-xl font-bold mb-5 text-left">
           Delivery Information
         </h1>
         <form onSubmit={(e) => e.preventDefault()}>
