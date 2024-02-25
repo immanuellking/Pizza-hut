@@ -152,7 +152,7 @@ const Checkout = () => {
           {customer && address && phone && email ? (
             <div className="flex justify-center mt-10">
               <PayButton
-                amount={totalCartPrice * 1700}
+                amount={totalCartPrice}
                 email={email}
                 cart={cart}
                 customer={customer}
