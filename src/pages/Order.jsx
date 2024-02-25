@@ -35,16 +35,16 @@ const Order = () => {
           Order<span className="text-xl font-bold text-black ml-2">#{id}</span>
         </h2>
 
-        <div className="flex items-center justify-between gap-x-2">
+        <div className="flex items-center justify-between gap-x-1 sm:gap-x-2">
           <p className="text-lg font-semibold text-gray-500">Status</p>
-          <div className=" space-x-2">
+          <div className="space-x-1 sm:space-x-2">
             {priority && (
-              <span className="px-8 py-2 uppercase rounded-full font-semibold bg-red-500 text-sm text-white">
+              <span className="px-4 sm:px-8 py-2 uppercase rounded-full font-semibold bg-red-500 text-sm text-white">
                 Priority
               </span>
             )}
-            <span className="px-8 py-2 uppercase rounded-full font-semibold bg-green-500 text-sm text-white">
-              {status} order
+            <span className="px-4 sm:px-8 py-2 uppercase rounded-full font-semibold bg-green-500 text-sm text-white">
+              {status}
             </span>
           </div>
         </div>
