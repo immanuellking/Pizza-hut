@@ -59,11 +59,11 @@ const Modal = ({ show, pizza, setShow }) => {
       // onClick={() => setShow(false)}
     >
       <main className="w-full sm:max-w-[30rem] bg-white relative rounded-t-3xl sm:rounded-3xl">
-        <div className="mx-5 my-5">
-          <div className="w-full h-72 overflow-hidden rounded-t-2xl">
+        <div className="mx-3 sm:mx-5 my-3 sm:my-5">
+          <div className="w-full h-60 sm:h-72 overflow-hidden rounded-t-2xl">
             <img src={imageUrl} alt="pizza" className="w-full h-full" />
           </div>
-          <div className=" py-4 space-y-3">
+          <div className=" py-2 sm:py-4 space-y-3">
             <div className="flex justify-between">
               <h3 className="text-base font-bold">{name}</h3>
               <p className="font-semibold">{formatCurrency(unitPrice)}</p>
