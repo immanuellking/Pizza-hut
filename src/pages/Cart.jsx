@@ -27,11 +27,11 @@ const Cart = () => {
 
   console.log("Total Price!!!", totalCartPrice);
   return (
-    <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 sm:my-10">
-      <BackNav title={`${cart.length > 0 ? "My Order" : ""}`} />
+    <div className="w-[95%] sm:w-[90%] lg:w-[70%] mx-auto my-5 mt-44 sm:my-10 sm:mt-20">
+      <BackNav title={`${cart.length > 0 ? "My Cart" : ""}`} />
 
       {cart.length > 0 ? (
-        <main className="w-full">
+        <main className="w-full my-8">
           <ul className="w-full space-y-8">
             {cart.map((item) => (
               <CartItem key={item.id} item={item} calcTotal={calcTotal} />
