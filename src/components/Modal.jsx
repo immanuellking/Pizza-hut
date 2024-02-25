@@ -87,7 +87,7 @@ const Modal = ({ show, pizza, setShow }) => {
             decreaseAmount={decreaseAmount}
             value={value}
           />
-          <Button type={"primary"} onClick={handleAddToCart}>
+          <Button type="modal" onClick={handleAddToCart}>
             Add to order
           </Button>
         </div>
