@@ -38,9 +38,7 @@ const CartItem = ({ item, calcTotal }) => {
         <div>
           <p className="font-semibold text-xl">{name}</p>
           <div className="italic text-sm text-gray-400 flex gap-x-1">
-            {ingredients.map((ingredient) => (
-              <p>{ingredient}, </p>
-            ))}
+            <p>{ingredients.join(", ")}</p> 
           </div>
         </div>
 
@@ -48,7 +46,7 @@ const CartItem = ({ item, calcTotal }) => {
           <div className="font-semibold text-lg">
             {formatCurrency(totalPrice)}
           </div>
-          <div className="flex items-end gap-x-4">
+          <div className="flex items-center gap-x-4">
             <UpdateItemCart
               value={quantity}
               increaseAmount={increaseAmount}
