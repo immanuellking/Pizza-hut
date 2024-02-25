@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-full h-screen flex relative">
+    <div className="w-full h-screen flex relative mt-36 sm:mt-0">
       <div className="w-[40%] sm:w-[50%] h-full"></div>
       <div
         className="h-full w-[60%] sm:w-[50%]"
