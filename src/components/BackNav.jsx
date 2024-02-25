@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 const BackNav = ({ title }) => {
   const navigate = useNavigate();
+  //text-center text-4xl italic pt-16
   return (
-    <div className="w-full flex items-center justify-center relative mb-10 sm:mb-16">
+    <div className="w-full flex items-center justify-center relative mb-5 sm:mb-16 sm:pt-24 lg:pt-16">
       <div
         className="flex items-center absolute left-0 cursor-pointer"
         onClick={() => navigate(-1)}
@@ -23,7 +24,7 @@ const BackNav = ({ title }) => {
         </svg>
         <div className="ml-2 sm:ml-4">Back</div>
       </div>
-      <h1 className="text-center text-3xl font-semibold">{title}</h1>
+      <h1 className="text-center text-4xl font-semibold italic">{title}</h1>
     </div>
   );
 };
