@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getMenu } from "../services/apiRestaurant";
 import { useLoaderData } from "react-router-dom";
 import MenuItem from "../components/MenuItem";
@@ -35,6 +35,10 @@ const Menu = () => {
   const goToPage = (no) => {
     setCurrentPage(no);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   return (
     <div className="w-[90%] mx-auto mt-44 sm:mt-20">
