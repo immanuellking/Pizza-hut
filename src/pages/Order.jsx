@@ -24,20 +24,20 @@ const Order = () => {
 
   useEffect(() => {
     if (!fetcher.data && fetcher.state === "idle") {
-      fetcher.load("/");
+      fetcher.load("/menu");
     }
   }, [fetcher]);
 
   return (
-    <div className="w-[95%] sm:w-[90%] lg:w-[60%] mx-auto my-5 sm:my-10">
+    <div className="w-[95%] sm:w-[90%] lg:w-[60%] mx-auto mb-5 sm:mb-10 mt-44 sm:mt-28">
       <div className="flex flex-col sm:flex-row gap-y-4 justify-between mb-8">
         <h2 className="text-lg font-semibold text-gray-500">
           Order<span className="text-xl font-bold text-black ml-2">#{id}</span>
         </h2>
 
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center justify-between gap-x-2">
           <p className="text-lg font-semibold text-gray-500">Status</p>
-          <div className="space-x-2">
+          <div className=" space-x-2">
             {priority && (
               <span className="px-8 py-2 uppercase rounded-full font-semibold bg-red-500 text-sm text-white">
                 Priority
@@ -50,7 +50,7 @@ const Order = () => {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-start justify-center gap-y-2 sm:justify-between sm:items-center bg-black h-20 text-lg font-semibold text-white px-2 sm:px-6">
+      <div className="flex flex-col sm:flex-row items-start justify-center gap-y-2 sm:justify-between sm:items-center bg-black h-20 sm:text-lg font-semibold text-white px-2 sm:px-6">
         <p>
           {deliveryIn > 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 🛵`
@@ -103,7 +103,7 @@ const Order = () => {
               {formatCurrency(orderPrice + priorityPrice)}
             </p>
             <p className="text-gray-600">
-              (NGN{(orderPrice * 1700 + priorityPrice * 1700).toLocaleString()})
+              (NGN{((orderPrice * 1700) + ( priorityPrice * 1700)).toLocaleString()})
             </p>
           </div>
         </div>
